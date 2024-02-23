@@ -40,7 +40,7 @@ import { getCldImageUrl } from "next-cloudinary"
 import { useRouter } from "next/navigation";
 import { updateCredits } from "@/lib/actions/user.action";
 import MediaUploader from "./MediaUploader";
-import { addImage } from "@/lib/actions/image.action";
+import { addImage, updateImage } from "@/lib/actions/image.action";
 
 // import { InsufficientCreditsModal } from "./InsufficientCreditsModal"
 
@@ -61,6 +61,7 @@ const TransformationForm = ({
   config = null,
 }: TransformationFormProps) => {
   const [image, setImage] = useState(data);
+  const transformationType = transformationTypes[type];
   const [newTransformation, setNewTransformation] =
     useState<Transformations | null>(null);
   const [transformationConfig, setTransformationConfig] = useState(config);
@@ -165,6 +166,7 @@ const TransformationForm = ({
       width: imageSize.width,
       height: imageSize.height,
     }));
+    return onChangeField(value);
   };
 
   //input handler
@@ -185,18 +187,24 @@ const TransformationForm = ({
     }, 1000)();
     return onChangeField(value);
   };
-
   const onTransformHandler = async () => {
-    setIsTransforming(true);
+    setIsTransforming(true)
 
     setTransformationConfig(
       deepMergeObjects(newTransformation, transformationConfig)
-    );
-    setNewTransformation(null);
+    )
+
+    setNewTransformation(null)
+
     startTransition(async () => {
-      await updateCredits(userId, creditFee);
-    });
-  };
+      await updateCredits(userId, creditFee)
+    })
+  }
+  useEffect(() => {
+    if(image && (type === 'restore' || type === 'removeBackground')) {
+      setNewTransformation(transformationType.config)
+    }
+  }, [image, transformationType.config, type])
 
   return (
     <Form {...form}>
@@ -209,7 +217,7 @@ const TransformationForm = ({
           render={({ field }) => <Input {...field} className="input-field" />}
         />
 
-        {type === "fill" && (
+{type === 'fill' && (
           <CustomField
             control={form.control}
             name="aspectRatio"
@@ -217,9 +225,7 @@ const TransformationForm = ({
             className="w-full"
             render={({ field }) => (
               <Select
-                onValueChange={(value: string) =>
-                  onSelectFieldHandler(value, field.onChange)
-                }
+                onValueChange={(value) => onSelectFieldHandler(value, field.onChange)}
                 value={field.value}
               >
                 <SelectTrigger className="select-field">
@@ -233,9 +239,10 @@ const TransformationForm = ({
                   ))}
                 </SelectContent>
               </Select>
-            )}
+            )}  
           />
         )}
+
 
         {(type === "remove" || type === "recolor") && (
           <div className="prompt-field">
@@ -311,13 +318,13 @@ const TransformationForm = ({
           />
         </div>
         <div className="flex flex-col gap-4">
-          <Button
+           <Button 
             type="button"
             className="submit-button capitalize"
             disabled={isTransforming || newTransformation === null}
             onClick={onTransformHandler}
           >
-            {isTransforming ? "Transforming..." : "Apply Transfrom"}
+            {isTransforming ? 'Transforming...' : 'Apply Transformation'}
           </Button>
           <Button
             type="submit"
