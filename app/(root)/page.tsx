@@ -1,17 +1,21 @@
+import Collection from "@/components/shared/Collection";
+import { navLinks } from "@/constants";
+import { getAllImages } from "@/lib/actions/image.action";
 
-import { navLinks } from "@/constants"
+import Image from "next/image";
+import Link from "next/link";
 
-import Image from "next/image"
-import Link from "next/link"
+const Home = async ({ searchParams }: SearchParamProps) => {
+  const page = Number(searchParams?.page) || 1;
+  const searchQuery = (searchParams?.query as string) || "";
 
-const Home = async({searchParams}:SearchParamProps) => {
+  const images = await getAllImages({ page, searchQuery });
+
   return (
-   <>
-   <section className="home">
-    <h1 className="home-heading">
-      Your one and only AI companion
-    </h1>
-    <ul className="flex-center w-full gap-20">
+    <>
+      <section className="home">
+        <h1 className="home-heading">Your one and only AI companion</h1>
+        <ul className="flex-center w-full gap-20">
           {navLinks.slice(1, 5).map((link) => (
             <Link
               key={link.route}
@@ -25,11 +29,16 @@ const Home = async({searchParams}:SearchParamProps) => {
             </Link>
           ))}
         </ul>
-   </section>
-   <section className="sm:mt-12">
-    hello
-   </section>
-   </>
+      </section>
+      <section className="sm:mt-12">
+        <Collection
+          hasSearch={true}
+          images={images?.data}
+          totalPages={images?.totalPage}
+          page={page}
+        />
+      </section>
+    </>
   );
 };
 

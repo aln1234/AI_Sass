@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose";
+import { Document, Schema, model, models } from "mongoose";
 
 export interface IImage extends Document {
   title: string;
@@ -39,4 +39,5 @@ const ImageSchema = new Schema({
 });
 
 const Image = models?.Image || model("Image", ImageSchema);
+
 export default Image;
