@@ -19,6 +19,7 @@ export async function POST(request: Request) {
 
   // Get the ID and type
   const eventType = event.type;
+  console.log(eventType ,"I am transaction")
 
   // CREATE
   if (eventType === "checkout.session.completed") {
@@ -32,7 +33,7 @@ export async function POST(request: Request) {
       buyerId: metadata?.buyerId || "",
       createdAt: new Date(),
     };
-
+    console.log(transaction,"I am transaction")
     const newTransaction = await createTransaction(transaction);
     
     return NextResponse.json({ message: "OK", transaction: newTransaction });
