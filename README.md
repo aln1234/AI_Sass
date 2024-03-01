@@ -13,7 +13,7 @@ AI companion is a image manipulation app built in Next JS 14 and tailwind css. I
 
 
 ## Table of contents
-- [Packages] (#packages)
+- [Packages](#packages)
 - [Getting Started](#getting-started)
 - [Deployments](#deployment)
 
