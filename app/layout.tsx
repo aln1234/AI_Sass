@@ -11,8 +11,8 @@ const IBMPlex = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Creatify",
-  description: "AI-powered image generator",
+  title: "AI companion: Image Manipulation App with Next.js and Cloudinary",
+  description: "AI companion is a web app that lets you transform your images with artificial intelligence. You can restore, fill, remove, or change your photos with Cloudinary API. Sign up with Clerk and get 5 credits for free",
 };
 
 export default function RootLayout({
