@@ -13,18 +13,24 @@ AI companion is a image manipulation app built in Next JS 14 and tailwind css. I
 
 
 ## Table of contents
+- [Packages] (#packages)
 - [Getting Started](#getting-started)
 - [Deployments](#deployment)
 
+## Packages
+Clerk:This is the foundational JavaScript library for building user management and authentication with Clerk. It enables you to register, sign in, verify and manage users for your application using highly customizable flows.
+Stripe:This is the official Stripe Node.js library that provides convenient access to the Stripe API from server-side JavaScript applications. It allows you to create and manage Stripe resources, such as customers, payment methods, charges, subscriptions, invoices, and more.
+Shadcn:It is a service that provides a collection of UI components for web development, based on Tailwind CSS and Radix UI. shadcn offers various npm packages to help developers use these components in their projects
 
 ## Getting Started
+User can login in the system using their own email and password or use third pary authentication. Then after logging user are preovided with 5 credit to use. Every transformation uses one credit and it will be deducted from theit total credit. They can also but the creit using payment system which is handle by stripe. The payment features is in development phase so the user can use dummy input to buy the credit.
 
-Here are the GitHub links to the front end as well as the back end. There is also the swagger documentation of the API (If anybody wants to tinker directly with the APIs).
-Proper documentation of running the front-end and back-end is written respectively on their GitHub pages.
+### Transformation availabe
+Image Restore:  Refines images by removing noise and imperfections.
+Generative fill: Enhance and Image dimensions using AI inputs.
+Object remove: Identify and remove objects from the image.
+Background remove: Remove background of the image.
 
-1. [fs16-frontend](https://github.com/aln1234/fs16_6-frontend-project.git)
-2. [fs16-backend](https://github.com/aln1234/fs16-backend.git)
-3. [Swagger Documentation](https://app.swaggerhub.com/apis/ALBINLAMICHHANE9/E-commerceApi/1.0)
 
 ## Deployments
-The project is live at (https://fs16-6-frontend-project-chi.vercel.app/)
+The project is live at (https://ai-sass-henna.vercel.app/)
